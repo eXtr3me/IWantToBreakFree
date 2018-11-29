@@ -6,9 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="I-want-to-break-free" />
+        <module name="IWantToBreakFree" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="10" />
   </component>
 </project>
