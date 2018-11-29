@@ -1,16 +1,25 @@
-package org.academiadecodigo.variachis.delta.back_end.persistence.model;
+package org.academiadecodigo.variachis.delta.back_end.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.validation.constraints.*;
 
-@Entity
-@Table(name = "customer")
-public class Customer extends AbstractModel {
+public class CustomerDTO {
 
+    @NotNull(message = "username is mandatory")
+    @NotBlank(message = "username is mandatory")
+    @Size(min = 4, max = 20)
     private String username;
+
+    @Size(min = 6, max = 20)
     private String password;
+
+    @Email
+    @NotBlank(message = "email is mandatory")
     private String email;
+
+    @Pattern(regexp = "^\\+?[0-9]*$", message = "phone number contains invalid characters")
+    @Size(min = 9, max = 16)
     private String phone;
+
     private String addiction;
 
     public String getUsername() {
