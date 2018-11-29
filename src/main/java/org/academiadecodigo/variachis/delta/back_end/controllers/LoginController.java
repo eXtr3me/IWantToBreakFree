@@ -6,12 +6,12 @@ import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCus
 import org.academiadecodigo.variachis.delta.back_end.dto.AuthCustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
-import org.academiadecodigo.variachis.delta.back_end.services.AuthService;
+import org.academiadecodigo.variachis.delta.back_end.services.AuthServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 
@@ -21,22 +21,46 @@ import javax.validation.Valid;
 public class LoginController {
 
     private AuthCustomerDTOToCustomer authCustomerDTOToCustomer;
-    private AuthService authService;
-    private CustomerToCustomerDTO customerToCustomerDTO;
-    private CustomerDTOToCustomer customerDTOToCustomer;
+    private AuthServiceImpl authService;
     private CustomerRestController customerRestController;
+    private CustomerToCustomerDTO customerToCustomerDTO;
 
 
-   //POST
-   @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
-   public ResponseEntity<?> addCustomer(@Valid @RequestBody AuthCustomerDTO authCustomerDTO, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
+    @Autowired
+    public void setAuthCustomerDTOToCustomer(AuthCustomerDTOToCustomer authCustomerDTOToCustomer) {
+        this.authCustomerDTOToCustomer = authCustomerDTOToCustomer;
+    }
 
-       if (bindingResult.hasErrors()) {
-           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-       }
+    @Autowired
+    public void setAuthService(AuthServiceImpl authService) {
+        this.authService = authService;
+    }
 
-       Customer loginCustomer = authService.verify(authCustomerDTOToCustomer.convert(authCustomerDTO));
+    @Autowired
+    public void setCustomerRestController(CustomerRestController customerRestController) {
+        this.customerRestController = customerRestController;
+    }
 
-      customerRestController.getCustomer(loginCustomer.getId());
-   };
+    @Autowired
+    public void setCustomerToCustomerDTO(CustomerToCustomerDTO customerToCustomerDTO) {
+        this.customerToCustomerDTO = customerToCustomerDTO;
+    }
+
+    //POST
+    @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
+    public ResponseEntity<?> addCustomer(@Valid @RequestBody AuthCustomerDTO authCustomerDTO, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Customer customer = authService.verify(authCustomerDTOToCustomer.convert(authCustomerDTO));
+
+        if (customer == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        CustomerDTO customerDTO = customerToCustomerDTO.convert(customer);
+        return new ResponseEntity<>(customerDTO, HttpStatus.OK);
+    }
 }
