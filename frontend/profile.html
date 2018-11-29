@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+        <body style="background-color:aliceblue;">
+
+
+    <head>
+        <title>User profile</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        <style>
+            
+            .container{overflow: hidden}
+            .tab{float: left;}
+            .tab-2{margin-left: 50px}
+            .tab-2 input{display: block;margin-bottom: 10px}
+            tr{transition:all .25s ease-in-out}
+            tr:hover{background-color:#EEE;cursor: pointer}
+            
+        </style>
+        
+    </head>
+    <body>
+        <th>Welcome, (username - puxar da base)</th>
+        <br>
+        <th>(mood marble / altera-se a mesma clicando em cima)</th>
+        <br>
+        <th>Addiction: (addiction - puxar da base)</th>
+        <br>
+        <br>
+        <br>
+        <th>SMOKED CIGARS</th>
+        <br>
+        <th>Total: (puxar da base)</th>
+        <br>
+        <th>Average (monthly): (puxar da base)</th>
+
+        <h4>Consume</h4>
+        <div class="container">
+
+            <div class="tab tab-2">
+                
+                Pack cost :<input type="text" name="pack_cost" id="pack_cost">
+                Cigar(s) smoked :<input type="text" name="cigar_smoked" id="cigar_smoked">
+                
+                <button onclick="addHtmlTableRow();">Add</button>
+
+            </div>
+        </div>
+        
+        <th>Cost: (calcular valor do input / 20)</th>
+        <br>
+        <th>Tocal cost: (calcula quanto foi gasto até o último input)</th>
+        <br>
+        <br>
+        <br>
+
+
+
+
+        <h4>HISTORY</h4>
+        <th>(search engine for date? - traz o histórico de input)</th>
+        <br>
+        <th>Saved money: (puxar da base - referente ao dia. O cálculo deve se basear na média diária)</th>
+        <br>
+        <th>Total saved money: (puxar da base)</th>
+
+
+
+
+        <script>
+            
+            var rIndex,
+                table = document.getElementById("table");
+            
+            // check the empty input
+            function checkEmptyInput()
+            {
+                var isEmpty = false,
+                pack_cost = document.getElementById("pack_cost").value,
+                cigar_smoked = document.getElementById("cigar_smoked").value,
+            
+                if(pack_cost === ""){
+                    alert("Please provide the Pack Cost");
+                    isEmpty = true;
+                }
+                else if(cigar_smoked === ""){
+                    alert("Please provide the amount of cigars smoked");
+                    isEmpty = true;
+                }
+                return isEmpty;
+            }
+            
+            
+            // display selected row data into input text
+            function selectedRowToInput()
+            {
+                
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                      // get the seected row index
+                      rIndex = this.rowIndex;
+                      document.getElementById("pack_cost").value = this.cells[0].innerHTML;
+                      document.getElementById("cigar_smoked").value = this.cells[1].innerHTML;
+                    };
+                }
+            }
+            selectedRowToInput();
+            
+            function editHtmlTbleSelectedRow()
+            {
+                var pack_cost = document.getElementById("pack_cost").value,
+                cigar_smoked = document.getElementById("lname").value,
+               if(!checkEmptyInput()){
+                table.rows[rIndex].cells[0].innerHTML = fname;
+                table.rows[rIndex].cells[1].innerHTML = lname;
+              }
+            }
+            
+        </script>
+        <h4>PROGRESS</h4>
+        <img src="top_progress.png" alt="Top Progress" width="500" height="80">
+    </body>
+</html>
