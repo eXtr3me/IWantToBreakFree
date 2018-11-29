@@ -1,129 +1,193 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>I want to break free</title>
-    <meta charset="windows-1252">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body style="background-color:#f1f1f1">
 
-    <style>
-        .container {
-            overflow: hidden
-        }
+    <head>
 
-        .tab {
-            float: left;
-        }
+        <style>
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
 
-        .tab-2 {
-            margin-left: 50px
-        }
+            .header {
+                padding: 10px 16px;
+                background: #555;
+                color: #f1f1f1;
+            }
 
-        .tab-2 input {
-            display: block;
-            margin-bottom: 10px
-        }
+            .content {
+                padding: 16px;
+            }
 
-        tr {
-            transition: all .25s ease-in-out
-        }
+            .sticky {
+                position: fixed;
+                top: 0;
+                width: 100%;
+            }
 
-        tr:hover {
-            background-color: #EEE;
-            cursor: pointer
-        }
-    </style>
+            .sticky+.content {
+                padding-top: 102px;
+            }
+        </style>
 
-</head>
-
-<body>
-    <center>
-
-        <h1>I want to be free</h1>
-        <br>
-        <br>
-        <h3>Welcome.</h3>
-
-        <div class="container">
-            <center>
-                <div class="tab tab-2">
-                    username :<input type="text" name="username" id="username"> password :<input type="text" name="password"
-                        id="password">
-
-                    <button onclick="addHtmlTableRow();">Sign in</button>
-
-                </div>
-            </center>
+        <div class="header" id="myHeader">
+            <h2>I want to break free</h2>
         </div>
 
-        <script>
 
-            var rIndex,
-                table = document.getElementById("table");
+        <title>I want to break free</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-            // check the empty input
-            function checkEmptyInput() {
-                var isEmpty = false,
-                    fname = document.getElementById("username").value,
-                    lname = document.getElementById("password").value,
-
-                if (username === "") {
-                    alert("Please provide your Username");
-                    isEmpty = true;
-                }
-                else if (password === "") {
-                    alert("Please provide your Password");
-                    isEmpty = true;
-                }
-
-                return isEmpty;
+        <style>
+            .container {
+                overflow: hidden
             }
 
-            // add Row
-            function addHtmlTableRow() {
-                // get the table by id
-                // create a new row and cells
-                // get value from input text
-                // set the values into row cell's
-                if (!checkEmptyInput()) {
-                    var newRow = table.insertRow(table.length),
-                        cell1 = newRow.insertCell(0),
-                        cell2 = newRow.insertCell(1),
-                        username = document.getElementById("username").value,
-                        password = document.getElementById("password").value,
-
-                        cell1.innerHTML = username;
-                    cell2.innerHTML = password;
-                    // call the function to set the event to the new row
-                    selectedRowToInput();
-                }
+            .tab {
+                float: left;
             }
 
-            // display selected row data into input text
-            function selectedRowToInput() {
-
-                for (var i = 1; i < table.rows.length; i++) {
-                    table.rows[i].onclick = function () {
-                        // get the seected row index
-                        rIndex = this.rowIndex;
-                        document.getElementById("username").value = this.cells[0].innerHTML;
-                        document.getElementById("password").value = this.cells[1].innerHTML;
-                    };
-                }
-            }’
-            selectedRowToInput();
-
-            function editHtmlTbleSelectedRow() {
-                var fname = document.getElementById("username").value,
-                    lname = document.getElementById("password").value,
-                if (!checkEmptyInput()) {
-                    table.rows[rIndex].cells[0].innerHTML = username;
-                    table.rows[rIndex].cells[1].innerHTML = password;
-                }
+            .tab-2 {
+                margin-left: 600px
             }
 
-        </script>
-    </center>
-</body>
+            .tab-2 input {
+                display: block;
+                margin-bottom: 10px
+            }
+
+            tr {
+                transition: all .25s ease-in-out
+            }
+
+            tr:hover {
+                background-color: #f1f1f1;
+                cursor: pointer
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <center>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3>Helping people in the pursuit of a healthier life</h3>
+
+            <div class="container">
+                <center>
+                    <div class="tab tab-2">
+                        username :<input type="text" name="username" id="username"> password :<input type="text" name="password"
+                            id="password">
+
+                        <button onclick="addHtmlTableRow();">Sign in</button>
+
+                    </div>
+                </center>
+            </div>
+
+<br>
+<br>
+<img src="infographic.png" alt="Infographic">
+
+
+
+            <script>
+                var rIndex,
+                    table = document.getElementById("table");
+
+                // check the empty input
+                function checkEmptyInput() {
+                    var isEmpty = false,
+                        fname = document.getElementById("username").value,
+                        lname = document.getElementById("password").value,
+
+                    if (username === " ") {
+                        alert("Please provide your Username");
+                        isEmpty = true;
+                    }
+                    else if (password === " ") {
+                        alert("Please provide your Password");
+                        isEmpty = true;
+                    }
+
+                    return isEmpty;
+                }
+
+                // add Row
+                function addHtmlTableRow() {
+                    // get the table by id
+                    // create a new row and cells
+                    // get value from input text
+                    // set the values into row cell's
+                    if (!checkEmptyInput()) {
+                        var newRow = table.insertRow(table.length),
+                            cell1 = newRow.insertCell(0),
+                            cell2 = newRow.insertCell(1),
+                            username = document.getElementById("username").value,
+                            password = document.getElementById("password").value,
+
+
+
+                            cell1.innerHTML = username;
+                        cell2.innerHTML = password;
+                        // call the function to set the event to the new row
+                        selectedRowToInput();
+                    }
+                }
+
+                // display selected row data into input text
+                function selectedRowToInput() {
+
+                    for (var i = 1; i < table.rows.length; i++) {
+                        table.rows[i].onclick = function () {
+                            // get the seected row index
+                            rIndex = this.rowIndex;
+                            document.getElementById("username").value = this.cells[0].innerHTML;
+                            document.getElementById("password").value = this.cells[1].innerHTML;
+                        };
+                    }
+                };
+                selectedRowToInput();
+
+                function editHtmlTbleSelectedRow() {
+                    var fname = document.getElementById("username").value,
+                        lname = document.getElementById("password").value,
+                    if (!checkEmptyInput()) {
+                        table.rows[rIndex].cells[0].innerHTML = username;
+                        table.rows[rIndex].cells[1].innerHTML = password;
+                    }
+                }
+
+            </script>
+        </center>
+
+        <style>
+            .footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #555;
+                color: #f1f1f1;
+                text-align: center;
+            }
+        </style>
+
+        <div class="footer">
+            <p>2018 - Jojo Corporation</p>
+        </div>
+
+
+
+
+    </body>
 
 </html>
