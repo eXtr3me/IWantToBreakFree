@@ -34,14 +34,14 @@ public class AuthServiceImpl implements AuthService {
         Customer authcustomer = authCustomerDTOToCustomer.convert(authCustomerDTO);
 
         if (authcustomer == null) {
-            throw new NotFoundException("message");
+            throw new NotFoundException("Customer not found");
         }
 
         Customer customer = customerDAO.getByName(authcustomer.getUsername());
 
 
         if (customer == null) {
-            throw new NotFoundException("");
+            throw new NotFoundException("Customer not found");
         }
 
         return customerDAO.verifyPassword(customer, authcustomer.getPassword());

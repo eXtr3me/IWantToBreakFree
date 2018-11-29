@@ -4,6 +4,7 @@ import org.academiadecodigo.variachis.delta.back_end.persistence.dao.CustomerDAO
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -16,6 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerDAO = customerDAO;
     }
 
+    @Transactional
     @Override
     public Customer get(Integer id) {
         return customerDAO.findById(id);

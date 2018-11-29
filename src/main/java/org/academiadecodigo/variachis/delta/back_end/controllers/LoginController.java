@@ -1,5 +1,6 @@
 package org.academiadecodigo.variachis.delta.back_end.controllers;
 
+import javassist.NotFoundException;
 import org.academiadecodigo.variachis.delta.back_end.converters.AuthCustomerDTOToCustomer;
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCustomer;
@@ -24,7 +25,6 @@ public class LoginController {
     private AuthServiceImpl authService;
     private CustomerRestController customerRestController;
     private CustomerToCustomerDTO customerToCustomerDTO;
-
 
     @Autowired
     public void setAuthCustomerDTOToCustomer(AuthCustomerDTOToCustomer authCustomerDTOToCustomer) {
@@ -54,7 +54,14 @@ public class LoginController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        Customer customer = authService.verify(authCustomerDTOToCustomer.convert(authCustomerDTO));
+        Customer customer = null;
+
+        try {
+            customer = authService.verify(authCustomerDTO);
+
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         if (customer == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -63,4 +70,6 @@ public class LoginController {
         CustomerDTO customerDTO = customerToCustomerDTO.convert(customer);
         return new ResponseEntity<>(customerDTO, HttpStatus.OK);
     }
+
+
 }

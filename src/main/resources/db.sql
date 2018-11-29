@@ -1,6 +1,7 @@
 DELETE FROM customer;
-INSERT INTO customer(ID, CREATIONTIME, UPDATETIME, VERSION, USERNAME, PASSWORD, EMAIL, PHONE, ADDICTION) VALUES
-  (1, TIMESTAMP '2017-10-10 08:45:56.468', TIMESTAMP '2017-10-10 08:45:56.468', 0, 'Rui', '1234', 'mail@gmail.com', '777888', 'tobacco'),
-  (2, TIMESTAMP '2017-10-10 08:45:56.481', TIMESTAMP '2017-10-10 08:45:56.481', 0, 'Sergio', '2345', 'mail@gmail.com', '777888', 'tobacco'),
-  (3, TIMESTAMP '2017-10-10 08:45:56.482', TIMESTAMP '2017-10-10 08:45:56.482', 0, 'Bruno', '3456', 'mail@gmail.com', '777888', 'tobacco')
-
+INSERT INTO customer(ID, USERNAME, PASSWORD, EMAIL, PHONE, ADDICTION) VALUES
+  (1, 'Rui', '1234', 'mail@gmail.com', '777888', 'tobacco');
+INSERT INTO customer(ID, USERNAME, PASSWORD, EMAIL, PHONE, ADDICTION) VALUES
+  (2, 'Sergio', '2345', 'mail@gmail.com', '777888', 'tobacco');
+INSERT INTO customer(ID, USERNAME, PASSWORD, EMAIL, PHONE, ADDICTION) VALUES
+  (3, 'Bruno', '3456', 'mail@gmail.com', '777888', 'tobacco');

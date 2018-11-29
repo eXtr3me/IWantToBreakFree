@@ -5,6 +5,7 @@ import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustom
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCustomer;
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
+import org.academiadecodigo.variachis.delta.back_end.services.CustomerService;
 import org.academiadecodigo.variachis.delta.back_end.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,12 +23,12 @@ import javax.validation.Valid;
 @RequestMapping("/customer")
 public class CustomerRestController {
 
-    private CustomerServiceImpl customerService;
+    private CustomerService customerService;
     private CustomerToCustomerDTO customerToDTOCustomer;
     private CustomerDTOToCustomer dtoCustomerToCustomer;
 
     @Autowired
-    public void setCustomerService(CustomerServiceImpl customerService) {
+    public void setCustomerService(CustomerService customerService) {
         this.customerService = customerService;
     }
 
@@ -41,7 +42,6 @@ public class CustomerRestController {
         this.dtoCustomerToCustomer = dtoCustomerToCustomer;
     }
 
-
     //serve a json with the customers info
     @GetMapping(path = {"/{id}"})
     public ResponseEntity<CustomerDTO> getCustomer(@PathVariable Integer id) {
@@ -50,7 +50,6 @@ public class CustomerRestController {
 
         return new ResponseEntity<>(customerToDTOCustomer.convert(customer), HttpStatus.OK);
     }
-
 
     //post a new customer
     @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
@@ -71,7 +70,6 @@ public class CustomerRestController {
 
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
-
 
     //edit a customer
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")

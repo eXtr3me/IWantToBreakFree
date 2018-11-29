@@ -13,11 +13,11 @@ import javax.persistence.criteria.Root;
 @Repository
 public class CustomerDAO {
 
-    protected Class<Customer> modelType;
+    protected Class<Customer> modelType = Customer.class;
 
-    @PersistenceContext
     protected EntityManager entityManager;
 
+    @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
