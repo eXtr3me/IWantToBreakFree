@@ -3,14 +3,12 @@ package org.academiadecodigo.variachis.delta.back_end.controllers;
 
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToDTOCustomer;
 import org.academiadecodigo.variachis.delta.back_end.converters.DTOCustomerToCustomer;
-import org.academiadecodigo.variachis.delta.back_end.dto.DTOCustomer;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
-import org.springframework.http.HttpHeaders;
+import org.academiadecodigo.variachis.delta.back_end.services.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
