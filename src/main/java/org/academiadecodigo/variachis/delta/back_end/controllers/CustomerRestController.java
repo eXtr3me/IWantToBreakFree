@@ -1,9 +1,9 @@
 package org.academiadecodigo.variachis.delta.back_end.controllers;
 
 
-import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToDTOCustomer;
-import org.academiadecodigo.variachis.delta.back_end.converters.DTOCustomerToCustomer;
-import org.academiadecodigo.variachis.delta.back_end.dto.DTOCustomer;
+import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustomerDTO;
+import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCustomer;
+import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
 import org.academiadecodigo.variachis.delta.back_end.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,8 @@ import javax.validation.Valid;
 public class CustomerRestController {
 
     private CustomerServiceImpl customerService;
-    private CustomerToDTOCustomer customerToDTOCustomer;
-    private DTOCustomerToCustomer dtoCustomerToCustomer;
+    private CustomerToCustomerDTO customerToDTOCustomer;
+    private CustomerDTOToCustomer dtoCustomerToCustomer;
 
     @Autowired
     public void setCustomerService(CustomerServiceImpl customerService) {
@@ -32,19 +32,19 @@ public class CustomerRestController {
     }
 
     @Autowired
-    public void setCustomerToDTOCustomer(CustomerToDTOCustomer customerToDTOCustomer) {
+    public void setCustomerToDTOCustomer(CustomerToCustomerDTO customerToDTOCustomer) {
         this.customerToDTOCustomer = customerToDTOCustomer;
     }
 
     @Autowired
-    public void setDtoCustomerToCustomer(DTOCustomerToCustomer dtoCustomerToCustomer) {
+    public void setDtoCustomerToCustomer(CustomerDTOToCustomer dtoCustomerToCustomer) {
         this.dtoCustomerToCustomer = dtoCustomerToCustomer;
     }
 
 
     //serve a json with the customers info
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity<DTOCustomer> getCustomer(@PathVariable Integer id) {
+    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable Integer id) {
 
         Customer customer = customerService.get(id);
 
@@ -54,7 +54,7 @@ public class CustomerRestController {
 
     //post a new customer
     @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
-    public ResponseEntity<?> addCustomer(@Valid @RequestBody DTOCustomer dtoCustomer, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> addCustomer(@Valid @RequestBody CustomerDTO dtoCustomer, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
         if (bindingResult.hasErrors() || dtoCustomer.getId() != null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -75,13 +75,13 @@ public class CustomerRestController {
 
     //edit a customer
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public ResponseEntity<DTOCustomer> editCustomer(@Valid @RequestBody DTOCustomer dtoCustomer, BindingResult bindingResult, @PathVariable Integer id) {
+    public ResponseEntity<CustomerDTO> editCustomer(@Valid @RequestBody CustomerDTO customerDto, BindingResult bindingResult, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (DTOCustomer.getId() != null && !DTOCustomer.getId().equals(id)) {
+        if (customerDto.getId() != null && !customerDto.getId().equals(id)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -89,16 +89,16 @@ public class CustomerRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        DTOCustomer.setId(id);
+        customerDto.setId(id);
 
-        customerService.save(dtoCustomerToCustomer.convert(dtoCustomer));
+        customerService.save(dtoCustomerToCustomer.convert(customerDto));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
     //delete a customer
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    public ResponseEntity<DTOCustomer> deleteCustomer(@PathVariable Integer id) {
+    public ResponseEntity<CustomerDTO> deleteCustomer(@PathVariable Integer id) {
         customerService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

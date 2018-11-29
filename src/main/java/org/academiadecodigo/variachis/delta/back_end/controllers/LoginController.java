@@ -1,8 +1,11 @@
 package org.academiadecodigo.variachis.delta.back_end.controllers;
 
 
-import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToDTOCustomer;
-import org.academiadecodigo.variachis.delta.back_end.converters.DTOCustomerToCustomer;
+import org.academiadecodigo.variachis.delta.back_end.converters.AuthCustomerDTOToCustomer;
+import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustomerDTO;
+import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCustomer;
+import org.academiadecodigo.variachis.delta.back_end.dto.AuthCustomerDTO;
+import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
 import org.academiadecodigo.variachis.delta.back_end.services.AuthService;
 import org.springframework.http.HttpStatus;
@@ -18,9 +21,10 @@ import javax.validation.Valid;
 @RequestMapping("/")
 public class LoginController {
 
+    private AuthCustomerDTOToCustomer authCustomerDTOToCustomer;
     private AuthService authService;
-    private CustomerToDTOCustomer customerToDTOCustomer;
-    private DTOCustomerToCustomer dtoCustomerToCustomer;
+    private CustomerToCustomerDTO customerToDTOCustomer;
+    private CustomerDTOToCustomer dtoCustomerToCustomer;
     private CustomerRestController customerRestController;
 
 
@@ -32,7 +36,7 @@ public class LoginController {
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
        }
 
-       Customer loginCustomer = authService.verify(Auth.convert(authCustomerDTO));
+       Customer loginCustomer = authService.verify(authCustomerDTOToCustomer.convert(authCustomerDTO));
 
       customerRestController.getCustomer(loginCustomer.getId());
    };

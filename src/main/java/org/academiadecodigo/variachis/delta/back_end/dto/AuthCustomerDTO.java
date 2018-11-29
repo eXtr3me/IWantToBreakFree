@@ -4,6 +4,8 @@ import javax.validation.constraints.*;
 
 public class AuthCustomerDTO {
 
+    private Integer id;
+
     @NotNull(message = "username is mandatory")
     @NotBlank(message = "username is mandatory")
     @Size(min = 4, max = 20)
@@ -11,6 +13,14 @@ public class AuthCustomerDTO {
 
     @Size(min = 6, max = 20)
     private String password;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
