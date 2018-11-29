@@ -23,7 +23,7 @@ public class LoginController {
 
     private AuthCustomerDTOToCustomer authCustomerDTOToCustomer;
     private AuthService authService;
-    private CustomerToCustomerDTO customerToDTOCustomer;
+    private CustomerToCustomerDTO customerToCustomerDTO;
     private CustomerDTOToCustomer dtoCustomerToCustomer;
     private CustomerRestController customerRestController;
 
