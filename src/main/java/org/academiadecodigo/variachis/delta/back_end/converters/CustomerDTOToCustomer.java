@@ -2,6 +2,7 @@ package org.academiadecodigo.variachis.delta.back_end.converters;
 
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
+import org.academiadecodigo.variachis.delta.back_end.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
