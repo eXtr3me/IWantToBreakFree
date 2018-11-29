@@ -24,6 +24,6 @@ public class AuthCustomerDTOToCustomer implements Converter<AuthCustomerDTO, Cus
         customer.setUsername(authCustomerDTO.getUsername());
         customer.setPassword(authCustomerDTO.getPassword());
 
-        return customer
+        return customer;
     }
 }
