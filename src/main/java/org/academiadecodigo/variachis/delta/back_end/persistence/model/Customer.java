@@ -1,8 +1,12 @@
 package org.academiadecodigo.variachis.delta.back_end.persistence.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "customer")
@@ -13,8 +17,22 @@ public class Customer extends AbstractModel {
     private String email;
     private String phone;
     private String addiction;
-    private Integer mediumDailySmokedCigarretes;
-  private List<String> diary;
+    private String mediumDailySmokedCigarretes;
+
+    @OneToMany(
+            // make sure to remove recipients if unlinked from customer
+            orphanRemoval = true,
+
+            // use recipient foreign key on recipient table to establish
+            // the many-to-one relationship instead of a join table
+            mappedBy = "customer"
+    )
+    private List<DiaryEntry> diary;
+
+
+    public List<DiaryEntry> getDiary() {
+        return diary;
+    }
 
     public String getUsername() {
         return username;
@@ -56,9 +74,10 @@ public class Customer extends AbstractModel {
         this.addiction = addiction;
     }
 
-    public Integer moneySpentToday() {
 
-    }
+   /* public Integer moneySpentToday() {
+
+    }*/
 
     @Override
     public String toString() {

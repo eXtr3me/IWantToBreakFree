@@ -2,9 +2,12 @@ package org.academiadecodigo.variachis.delta.back_end.services;
 
 import org.academiadecodigo.variachis.delta.back_end.persistence.dao.CustomerDAO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
+import org.academiadecodigo.variachis.delta.back_end.persistence.model.DiaryEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -32,6 +35,11 @@ public class CustomerServiceImpl implements CustomerService {
     public void delete(Integer id) {
         Customer customer = customerDAO.findById(id);
         customerDAO.delete(id);
+    }
+
+    @Override
+    public List<DiaryEntry> getDiary(Customer customer) {
+        return customerDAO.getDiary(customer);
     }
 
 

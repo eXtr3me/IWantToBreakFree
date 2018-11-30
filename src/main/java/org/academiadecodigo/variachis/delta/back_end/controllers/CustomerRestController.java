@@ -5,6 +5,7 @@ import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustom
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCustomer;
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
+import org.academiadecodigo.variachis.delta.back_end.persistence.model.DiaryEntry;
 import org.academiadecodigo.variachis.delta.back_end.services.CustomerService;
 import org.academiadecodigo.variachis.delta.back_end.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -99,6 +106,40 @@ public class CustomerRestController {
     public ResponseEntity<CustomerDTO> deleteCustomer(@PathVariable Integer id) {
         customerService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(path = "/{id}/diary")
+    public ResponseEntity<List<DiaryEntry>> accessDiary (@PathVariable Integer id) {
+
+       List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
+       return new ResponseEntity<>(diary, HttpStatus.OK);
+    }
+
+
+    @PostMapping (path = "/{id}/diary")
+    public ResponseEntity<String> postNewEntryInDiary(@Valid @RequestBody String numberOfSmokedCigarretesToday, BindingResult bindingResult, @PathVariable Integer id) {
+
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (id == null || numberOfSmokedCigarretesToday == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if (customerService.get(id) == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
+
+        DiaryEntry diaryEntry = new DiaryEntry(Calendar.getInstance().getTime(), numberOfSmokedCigarretesToday);
+
+        diary.add(diaryEntry);
+
+        customerService.save(customerService.get(id));
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

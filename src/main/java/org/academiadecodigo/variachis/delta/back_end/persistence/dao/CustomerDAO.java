@@ -1,6 +1,7 @@
 package org.academiadecodigo.variachis.delta.back_end.persistence.dao;
 
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
+import org.academiadecodigo.variachis.delta.back_end.persistence.model.DiaryEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +10,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CustomerDAO {
@@ -48,10 +52,16 @@ public class CustomerDAO {
 
         entityManager.find(modelType, customer);
 
-        if (customer.getPassword() == password) {
+        if (customer.getPassword().equals(password)) {
             return customer;
         }
 
         return null;
+    }
+
+    public List<DiaryEntry> getDiary(Customer customer) {
+        Customer customer1 = entityManager.find(modelType, customer.getId());
+
+        return customer1.getDiary();
     }
 }
