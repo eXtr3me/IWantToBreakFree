@@ -2,6 +2,7 @@ package org.academiadecodigo.variachis.delta.back_end.persistence.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
@@ -12,6 +13,8 @@ public class Customer extends AbstractModel {
     private String email;
     private String phone;
     private String addiction;
+    private Integer mediumDailySmokedCigarretes;
+  private List<String> diary;
 
     public String getUsername() {
         return username;
@@ -51,6 +54,10 @@ public class Customer extends AbstractModel {
 
     public void setAddiction(String addiction) {
         this.addiction = addiction;
+    }
+
+    public Integer moneySpentToday() {
+
     }
 
     @Override
