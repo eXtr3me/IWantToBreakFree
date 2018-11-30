@@ -3,7 +3,6 @@ package org.academiadecodigo.variachis.delta.back_end.dto;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-//@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class DiaryEntryDTO {
 
     private Integer id;
@@ -51,7 +50,7 @@ public class DiaryEntryDTO {
     public String toString() {
         return "DiaryEntryDTO{" +
                 "id=" + id +
-                ", date='" + date + '\'' +
+                ", date='" + date.toString() + '\'' +
                 ", numberOfSmokedCigarrettes=" + numberOfSmokedCigarrettes +
                 ", moneySpent=" + moneySpent +
                 '}';

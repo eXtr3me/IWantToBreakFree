@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import java.util.Date;
+
 import static java.lang.Integer.parseInt;
 
 
@@ -19,8 +21,6 @@ public class DiaryEntry extends AbstractModel {
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
-    //private Date date;
-    //@Generated(GenerationTime.ALWAYS)
     private String date;
     private Integer numberOfSmokedCigarrettes;
     private double moneySpent;

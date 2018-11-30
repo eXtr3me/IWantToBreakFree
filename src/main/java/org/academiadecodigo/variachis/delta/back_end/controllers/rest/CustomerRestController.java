@@ -114,9 +114,9 @@ public class CustomerRestController {
     public ResponseEntity<List<DiaryEntryDTO>> accessDiary(@PathVariable Integer id) {
 
         // List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
-        System.out.println("CUSTOMER " + customerService.get(id));
+       // System.out.println("CUSTOMER " + customerService.get(id));
         List<DiaryEntry> diary = customerService.get(id).getDiary();
-        System.out.println("DIARY " + Arrays.toString(diary.toArray()));
+        //System.out.println("DIARY " + Arrays.toString(diary.toArray()));
 
         List<DiaryEntryDTO> diaryDTO = new LinkedList<>();
 
@@ -125,7 +125,7 @@ public class CustomerRestController {
             diaryDTO.add(diaryEntryToDiaryentryDTO.convert(entry));
         }
 
-        System.out.println("DTO " + Arrays.toString(diaryDTO.toArray()));
+        //System.out.println("DTO " + Arrays.toString(diaryDTO.toArray()));
         return new ResponseEntity<>(diaryDTO, HttpStatus.OK);
     }
 
