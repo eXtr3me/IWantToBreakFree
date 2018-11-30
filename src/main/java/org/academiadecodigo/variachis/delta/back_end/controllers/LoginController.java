@@ -6,6 +6,7 @@ import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustom
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCustomer;
 import org.academiadecodigo.variachis.delta.back_end.dto.AuthCustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
+import org.academiadecodigo.variachis.delta.back_end.exceptions.CustomerNotFoundException;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
 import org.academiadecodigo.variachis.delta.back_end.services.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class LoginController {
         try {
             customer = authService.verify(authCustomerDTO);
 
-        } catch (NotFoundException e) {
+        } catch (CustomerNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
