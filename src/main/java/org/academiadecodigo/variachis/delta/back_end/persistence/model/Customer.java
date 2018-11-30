@@ -1,9 +1,6 @@
 package org.academiadecodigo.variachis.delta.back_end.persistence.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +24,7 @@ public class Customer extends AbstractModel {
             // use recipient foreign key on recipient table to establish
             // the many-to-one relationship instead of a join table
             mappedBy = "customer"
+            //fetch = FetchType.EAGER
     )
     private List<DiaryEntry> diary = new LinkedList<>();
 

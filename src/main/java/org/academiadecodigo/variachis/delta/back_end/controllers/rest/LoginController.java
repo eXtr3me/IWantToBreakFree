@@ -1,4 +1,4 @@
-package org.academiadecodigo.variachis.delta.back_end.controllers;
+package org.academiadecodigo.variachis.delta.back_end.controllers.rest;
 
 import org.academiadecodigo.variachis.delta.back_end.controllers.rest.CustomerRestController;
 import org.academiadecodigo.variachis.delta.back_end.converters.AuthCustomerDTOToCustomer;
@@ -19,7 +19,7 @@ import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class LoginController {
 
     private AuthCustomerDTOToCustomer authCustomerDTOToCustomer;

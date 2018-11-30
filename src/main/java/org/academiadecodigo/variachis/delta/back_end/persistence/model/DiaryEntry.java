@@ -1,5 +1,7 @@
 package org.academiadecodigo.variachis.delta.back_end.persistence.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,21 +23,11 @@ public class DiaryEntry extends AbstractModel {
     private String numberOfSmokedCigarretes;
     private double moneySpent;
 
-
-    public DiaryEntry(Date date, String numberOfSmokedCigarretes) {
-        this.date = date;
-        this.numberOfSmokedCigarretes = numberOfSmokedCigarretes;
-        this.moneySpent = parseInt(numberOfSmokedCigarretes) * PRICE_PER_CIGARRETTE;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
     public Date getDate() {
         return date;
     }
 
+    @Autowired
     public void setDate(Date date) {
         this.date = date;
     }
@@ -44,10 +36,18 @@ public class DiaryEntry extends AbstractModel {
         return numberOfSmokedCigarretes;
     }
 
+    @Autowired
     public void setNumberOfSmokedCigarretes(String numberOfSmokedCigarretes) {
         this.numberOfSmokedCigarretes = numberOfSmokedCigarretes;
+
+        setMoneySpent(parseInt(numberOfSmokedCigarretes) * PRICE_PER_CIGARRETTE);
     }
 
+   public Customer getCustomer() {
+        return customer;
+    }
+
+    @Autowired
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -56,7 +56,7 @@ public class DiaryEntry extends AbstractModel {
         return moneySpent;
     }
 
-    public void setMoneySpent(double moneySpent) {
+    private void setMoneySpent(double moneySpent) {
         this.moneySpent = moneySpent;
     }
 }

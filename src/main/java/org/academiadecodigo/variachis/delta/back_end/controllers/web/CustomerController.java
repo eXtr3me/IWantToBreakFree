@@ -19,8 +19,8 @@ import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.List;
 
-@Controller
-@RequestMapping("/customer")
+//@Controller
+//@RequestMapping("/web/customer")
 public class CustomerController {
 /*
     private CustomerService customerService;

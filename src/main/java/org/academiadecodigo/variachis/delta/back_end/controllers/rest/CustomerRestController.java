@@ -27,7 +27,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/customer")
 public class CustomerRestController {
 
     private CustomerService customerService;
@@ -133,7 +133,9 @@ public class CustomerRestController {
 
         List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
 
-        DiaryEntry diaryEntry = new DiaryEntry(Calendar.getInstance().getTime(), numberOfSmokedCigarretesToday);
+        DiaryEntry diaryEntry = new DiaryEntry();
+        diaryEntry.setDate(Calendar.getInstance().getTime());
+        diaryEntry.setNumberOfSmokedCigarretes(numberOfSmokedCigarretesToday);
 
         diary.add(diaryEntry);
 
