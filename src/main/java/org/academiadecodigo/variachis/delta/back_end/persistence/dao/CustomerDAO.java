@@ -4,6 +4,7 @@ import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.DiaryEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,18 +28,22 @@ public class CustomerDAO {
         this.entityManager = entityManager;
     }
 
+    @Transactional(readOnly = true)
     public Customer findById(Integer id) {
         return entityManager.find(modelType, id);
     }
 
+    @Transactional
     public Customer saveOrUpdate(Customer customer) {
         return entityManager.merge(customer);
     }
 
+    @Transactional
     public void delete(Integer id) {
         entityManager.remove(entityManager.find(modelType, id));
     }
 
+    @Transactional(readOnly = true)
     public Customer getByName(String username) {
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -58,9 +63,15 @@ public class CustomerDAO {
         return null;
     }
 
+    @Transactional(readOnly = true)
     public List<DiaryEntry> getDiary(Customer customer) {
         Customer customer1 = entityManager.find(modelType, customer.getId());
 
         return customer1.getDiary();
+    }
+
+    @Transactional
+    public DiaryEntry saveOrUpdate(DiaryEntry diaryEntry) {
+        return entityManager.merge(diaryEntry);
     }
 }

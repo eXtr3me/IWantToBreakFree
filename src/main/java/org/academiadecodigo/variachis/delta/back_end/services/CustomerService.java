@@ -17,4 +17,6 @@ public interface CustomerService {
     List<DiaryEntry> getDiary(Customer customer);
 
     String getDate();
+
+    DiaryEntry save(DiaryEntry diaryEntry);
 }

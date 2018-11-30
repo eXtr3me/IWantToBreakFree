@@ -6,6 +6,7 @@ import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCus
 import org.academiadecodigo.variachis.delta.back_end.converters.DiaryEntryToDiaryentryDTO;
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.dto.DiaryEntryDTO;
+import org.academiadecodigo.variachis.delta.back_end.dto.DiaryOutDTO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.DiaryEntry;
 import org.academiadecodigo.variachis.delta.back_end.services.CustomerService;
@@ -131,7 +132,7 @@ public class CustomerRestController {
 
 
     @PostMapping(path = "/{id}/diary")
-    public ResponseEntity<?> postNewEntryInDiary(@Valid @RequestBody Integer numberOfSmokedCigarrettesToday, BindingResult bindingResult, @PathVariable Integer id) {
+    public ResponseEntity<?> postNewEntryInDiary(@Valid @RequestBody DiaryOutDTO numberOfSmokedCigarrettesToday, BindingResult bindingResult, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -147,10 +148,12 @@ public class CustomerRestController {
 
         List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
         DiaryEntry diaryEntry = new DiaryEntry();
+        diaryEntry.setCustomer(customerService.get(id));
         diaryEntry.setDate(customerService.getDate());
-        diaryEntry.setNumberOfSmokedCigarrettes(numberOfSmokedCigarrettesToday);
+        diaryEntry.setNumberOfSmokedCigarrettes(numberOfSmokedCigarrettesToday.getNumberOfSmokedCigarrettes());
+        DiaryEntry newDiaryEntry = customerService.save(diaryEntry);
+        diary.add(newDiaryEntry);
 
-        diary.add(diaryEntry);
 
         customerService.save(customerService.get(id));
 

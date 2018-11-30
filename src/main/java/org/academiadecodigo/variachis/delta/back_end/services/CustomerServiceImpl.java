@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -27,27 +29,40 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDAO.findById(id);
     }
 
+    @Transactional
     @Override
     public Customer save(Customer customer) {
         return customerDAO.saveOrUpdate(customer);
     }
 
+    @Transactional
     @Override
     public void delete(Integer id) {
         Customer customer = customerDAO.findById(id);
         customerDAO.delete(id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<DiaryEntry> getDiary(Customer customer) {
         return customerDAO.getDiary(customer);
     }
+
     @Override
-    public String getDate(){
-        Date actualDate = new Date();
-        String date = actualDate.toString();
-        return date;
+    public String getDate() {
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String actualDate = dateFormat.format(new Date());
+
+        //String date = actualDate.toString();
+        //System.out.println(actualDate + " " + date);
+        return actualDate;
     }
 
+    @Transactional
+    @Override
+    public DiaryEntry save(DiaryEntry diaryEntry) {
+        return customerDAO.saveOrUpdate(diaryEntry);
+    }
 
 }
