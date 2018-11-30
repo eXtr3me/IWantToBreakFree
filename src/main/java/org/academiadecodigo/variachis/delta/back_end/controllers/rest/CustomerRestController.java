@@ -3,11 +3,12 @@ package org.academiadecodigo.variachis.delta.back_end.controllers.rest;
 
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCustomer;
+import org.academiadecodigo.variachis.delta.back_end.converters.DiaryEntryToDiaryentryDTO;
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
+import org.academiadecodigo.variachis.delta.back_end.dto.DiaryEntryDTO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.DiaryEntry;
 import org.academiadecodigo.variachis.delta.back_end.services.CustomerService;
-import org.academiadecodigo.variachis.delta.back_end.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,13 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -33,6 +29,7 @@ public class CustomerRestController {
     private CustomerService customerService;
     private CustomerToCustomerDTO customerToDTOCustomer;
     private CustomerDTOToCustomer dtoCustomerToCustomer;
+    private DiaryEntryToDiaryentryDTO diaryEntryToDiaryentryDTO;
 
     @Autowired
     public void setCustomerService(CustomerService customerService) {
@@ -47,6 +44,11 @@ public class CustomerRestController {
     @Autowired
     public void setDtoCustomerToCustomer(CustomerDTOToCustomer dtoCustomerToCustomer) {
         this.dtoCustomerToCustomer = dtoCustomerToCustomer;
+    }
+
+    @Autowired
+    public void setDiaryEntryToDiaryentryDTO(DiaryEntryToDiaryentryDTO diaryEntryToDiaryentryDTO) {
+        this.diaryEntryToDiaryentryDTO = diaryEntryToDiaryentryDTO;
     }
 
     //serve a json with the customers info
@@ -109,14 +111,22 @@ public class CustomerRestController {
     }
 
     @GetMapping(path = "/{id}/diary")
-    public ResponseEntity<List<DiaryEntry>> accessDiary (@PathVariable Integer id) {
+    public ResponseEntity<List<DiaryEntryDTO>> accessDiary(@PathVariable Integer id) {
 
-       List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
-       return new ResponseEntity<>(diary, HttpStatus.OK);
+        List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
+
+        List<DiaryEntryDTO> diaryDTO = new LinkedList<>();
+
+        for (DiaryEntry entry : diary) {
+
+            diaryDTO.add(diaryEntryToDiaryentryDTO.convert(entry));
+        }
+
+        return new ResponseEntity<>(diaryDTO, HttpStatus.OK);
     }
 
 
-    @PostMapping (path = "/{id}/diary")
+    @PostMapping(path = "/{id}/diary")
     public ResponseEntity<String> postNewEntryInDiary(@Valid @RequestBody String numberOfSmokedCigarretesToday, BindingResult bindingResult, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
@@ -134,7 +144,7 @@ public class CustomerRestController {
         List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
 
         DiaryEntry diaryEntry = new DiaryEntry();
-        diaryEntry.setDate(Calendar.getInstance().getTime());
+        diaryEntry.setDate(new java.sql.Date(new java.util.Date().getTime()));
         diaryEntry.setNumberOfSmokedCigarretes(numberOfSmokedCigarretesToday);
 
         diary.add(diaryEntry);

@@ -1,0 +1,54 @@
+package org.academiadecodigo.variachis.delta.back_end.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+
+//@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class DiaryEntryDTO {
+
+    private Integer id;
+
+    private Date date;
+
+    @NotNull
+    private String numberOfSmokedCigarretes;
+
+    private double moneySpent;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getNumberOfSmokedCigarretes() {
+        return numberOfSmokedCigarretes;
+    }
+
+    public void setNumberOfSmokedCigarretes(String numberOfSmokedCigarretes) {
+        this.numberOfSmokedCigarretes = numberOfSmokedCigarretes;
+    }
+
+    public double getMoneySpent() {
+        return moneySpent;
+    }
+
+    public void setMoneySpent(double moneySpent) {
+        this.moneySpent = moneySpent;
+    }
+}

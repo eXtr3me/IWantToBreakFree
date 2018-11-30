@@ -24,7 +24,6 @@ public class Customer extends AbstractModel {
             // use recipient foreign key on recipient table to establish
             // the many-to-one relationship instead of a join table
             mappedBy = "customer"
-            //fetch = FetchType.EAGER
     )
     private List<DiaryEntry> diary = new LinkedList<>();
 

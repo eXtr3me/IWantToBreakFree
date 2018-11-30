@@ -1,10 +1,13 @@
 package org.academiadecodigo.variachis.delta.back_end.persistence.model;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 import java.util.Date;
 
 import static java.lang.Integer.parseInt;
@@ -19,6 +22,9 @@ public class DiaryEntry extends AbstractModel {
     @ManyToOne
     private Customer customer;
 
+    //private Date date;
+    @Generated(GenerationTime.ALWAYS)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date date;
     private String numberOfSmokedCigarretes;
     private double moneySpent;
