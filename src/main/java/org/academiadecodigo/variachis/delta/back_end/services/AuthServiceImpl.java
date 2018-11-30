@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import org.academiadecodigo.variachis.delta.back_end.converters.AuthCustomerDTOToCustomer;
 import org.academiadecodigo.variachis.delta.back_end.dto.AuthCustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
+import org.academiadecodigo.variachis.delta.back_end.exceptions.CustomerNotFoundException;
 import org.academiadecodigo.variachis.delta.back_end.persistence.dao.CustomerDAO;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,22 +29,22 @@ public class AuthServiceImpl implements AuthService {
     }
 
 
-    public Customer verify(AuthCustomerDTO authCustomerDTO) throws NotFoundException {
+    public Customer verify(AuthCustomerDTO authCustomerDTO) throws CustomerNotFoundException {
 
 
-        Customer authcustomer = authCustomerDTOToCustomer.convert(authCustomerDTO);
+        Customer customer = authCustomerDTOToCustomer.convert(authCustomerDTO);
 
-        if (authcustomer == null) {
-            throw new NotFoundException("Customer not found");
+        if (customer == null) {
+            throw new CustomerNotFoundException();
         }
 
-        Customer customer = customerDAO.getByName(authcustomer.getUsername());
+        Customer customer1 = customerDAO.getByName(customer.getUsername());
 
 
         if (customer == null) {
-            throw new NotFoundException("Customer not found");
+            throw new CustomerNotFoundException();
         }
 
-        return customerDAO.verifyPassword(customer, authcustomer.getPassword());
+        return customerDAO.verifyPassword(customer1, customer.getPassword());
     }
 }

@@ -46,6 +46,7 @@ public class LoginController {
         this.customerToCustomerDTO = customerToCustomerDTO;
     }
 
+    //login verification
     //POST
     @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
     public ResponseEntity<?> addCustomer(@Valid @RequestBody AuthCustomerDTO authCustomerDTO, BindingResult bindingResult) {
@@ -68,6 +69,7 @@ public class LoginController {
         }
 
         CustomerDTO customerDTO = customerToCustomerDTO.convert(customer);
+
         return new ResponseEntity<>(customerDTO, HttpStatus.OK);
     }
 

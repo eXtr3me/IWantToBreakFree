@@ -50,8 +50,6 @@ public class CustomerDAO {
 
     public Customer verifyPassword(Customer customer, String password) {
 
-        entityManager.find(modelType, customer);
-
         if (customer.getPassword().equals(password)) {
             return customer;
         }

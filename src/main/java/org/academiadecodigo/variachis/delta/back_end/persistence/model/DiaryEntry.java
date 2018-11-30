@@ -5,19 +5,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
 
+import static java.lang.Integer.parseInt;
+
+
 @Entity
 @Table(name = "diary")
-public class DiaryEntry {
+public class DiaryEntry extends AbstractModel {
+
+    private static final double PRICE_PER_CIGARRETTE = 0.20;
 
     @ManyToOne
     private Customer customer;
     private Date date;
-    private String message;
+    private String numberOfSmokedCigarretes;
+    private double moneySpent;
 
 
-    public DiaryEntry(Date date, String message) {
+    public DiaryEntry(Date date, String numberOfSmokedCigarretes) {
         this.date = date;
-        this.message = message;
+        this.numberOfSmokedCigarretes = numberOfSmokedCigarretes;
+        this.moneySpent = parseInt(numberOfSmokedCigarretes) * PRICE_PER_CIGARRETTE;
     }
 
     public Customer getCustomer() {
@@ -32,11 +39,23 @@ public class DiaryEntry {
         this.date = date;
     }
 
-    public String getMessage() {
-        return message;
+    public String getNumberOfSmokedCigarretes() {
+        return numberOfSmokedCigarretes;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setNumberOfSmokedCigarretes(String numberOfSmokedCigarretes) {
+        this.numberOfSmokedCigarretes = numberOfSmokedCigarretes;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public double getMoneySpent() {
+        return moneySpent;
+    }
+
+    public void setMoneySpent(double moneySpent) {
+        this.moneySpent = moneySpent;
     }
 }
