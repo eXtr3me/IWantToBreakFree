@@ -63,13 +63,52 @@
             .sticky+.content {
                 padding-top: 102px;
             }
+
+
+img {
+    border-radius: 50%;
+}
+
+
+        <style>
+            .container {
+                overflow: hidden
+            }
+
+            .tab {
+                float: left;
+            }
+
+            .tab-2 {
+                margin-left: 600px
+            }
+
+            .tab-2 input {
+                display: block;
+                margin-bottom: 10px
+            }
+
+            tr {
+                transition: all .25s ease-in-out
+            }
+
+            tr:hover {
+                background-color: #f1f1f1;
+                cursor: pointer
+            }
+        </style>
+
+
+
+
+
         </style>
 
 
         <div class="header" id="myHeader">
-            <h2>Welcome, $username</h2>
+                <h2><img src="good_mood.png" alt="mood_marble" class="design" width="50" height="50">Welcome, $username</h2>
+            
         </div>
-
 
 
     </head>
@@ -78,21 +117,23 @@
     <body>
 
         <div class="content">
-
-
-            <th>(mood marble / altera-se a mesma clicando em cima)</th>
+            <center>
             <br>
-            <th>Addiction: (addiction - puxar da base)</th>
+            <th><b>Addiction: </b>(addiction - puxar da base)</th>
+            <br>
+            <img src="cigar_vector.png" alt="cigar_vector" class="design" width="50" height="50">
             <br>
             <br>
             <br>
-            <th>SMOKED CIGARS</th>
+            <th><b>SMOKED CIGARS</b></th>
             <br>
             <th>Total: (puxar da base)</th>
             <br>
             <th>Average (monthly): (puxar da base)</th>
-
-            <h4>Consume</h4>
+            <br>
+            <br>
+            <br>
+            <th><b>CONSUME</b></th>
             <div class="container">
 
                 <div class="tab tab-2">
@@ -104,10 +145,11 @@
 
                 </div>
             </div>
-
-            <th>Cost: (calcular valor do input / 20)</th>
+        <br>
+            <th>Amount spent: (calcular valor do Pack Cost / 20)</th>
             <br>
-            <th>Tocal cost: (calcula quanto foi gasto até o último input)</th>
+            <br>
+            <th>Total amount spent: (calcula quanto foi gasto até o último input - fazer uma soma total desse dado da base)</th>
             <br>
             <br>
             <br>
@@ -116,11 +158,13 @@
 
 
             <h4>HISTORY</h4>
-            <th>(search engine for date? - traz o histórico de input)</th>
-            <br>
+           <th>[Inserir uma Timeline]</th>
+                    
+            <!-- <br>
             <th>Saved money: (puxar da base - referente ao dia. O cálculo deve se basear na média diária)</th>
             <br>
-            <th>Total saved money: (puxar da base)</th>
+            <th>Total saved money: (puxar da base)</th> 
+        [INSERIR DEPOIS, SE DER, POIS O CÁLCULO NECESSITA DE MUITOS ACESSOS À BASE DE DADOS]-->
 
 
 
@@ -172,9 +216,10 @@
                 }
 
             </script>
+
             <h4>PROGRESS</h4>
             <img src="top_progress.png" alt="Top Progress" width="500" height="80">
-            <img src="infographic.png" alt="Infographic">
+
 
 
 
@@ -214,7 +259,7 @@
         <p>2018 - Jojo Corporation</p>
     </div>
 
-
+</center>
     </body>
 
 </html>

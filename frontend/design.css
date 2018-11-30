@@ -1,0 +1,18 @@
+p {
+    font-size: 12px;
+    font-family: Arial, Serif;
+  }
+  
+  body {
+    color: #000;
+    background-color: #f1f1f1;
+    font-family: Arial, Serif;
+  }
+
+
+  .avatar {
+    vertical-align: middle;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
