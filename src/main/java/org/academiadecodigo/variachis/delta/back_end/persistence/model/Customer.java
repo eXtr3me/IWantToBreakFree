@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,7 @@ public class Customer extends AbstractModel {
             // the many-to-one relationship instead of a join table
             mappedBy = "customer"
     )
-    private List<DiaryEntry> diary;
-
+    private List<DiaryEntry> diary = new LinkedList<>();
 
     public List<DiaryEntry> getDiary() {
         return diary;

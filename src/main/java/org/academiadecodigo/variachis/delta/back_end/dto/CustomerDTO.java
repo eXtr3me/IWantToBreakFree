@@ -8,10 +8,10 @@ public class CustomerDTO {
 
     @NotNull(message = "username is mandatory")
     @NotBlank(message = "username is mandatory")
-    @Size(min = 4, max = 20)
+    @Size(min = 3, max = 20)
     private String username;
 
-    @Size(min = 6, max = 20)
+    @Size(min = 4, max = 20)
     private String password;
 
     @Email

@@ -16,6 +16,7 @@ public class DiaryEntry extends AbstractModel {
 
     @ManyToOne
     private Customer customer;
+
     private Date date;
     private String numberOfSmokedCigarretes;
     private double moneySpent;

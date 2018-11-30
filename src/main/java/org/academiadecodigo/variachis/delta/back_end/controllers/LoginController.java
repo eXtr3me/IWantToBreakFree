@@ -1,13 +1,13 @@
 package org.academiadecodigo.variachis.delta.back_end.controllers;
 
-import javassist.NotFoundException;
+import org.academiadecodigo.variachis.delta.back_end.controllers.rest.CustomerRestController;
 import org.academiadecodigo.variachis.delta.back_end.converters.AuthCustomerDTOToCustomer;
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustomerDTO;
-import org.academiadecodigo.variachis.delta.back_end.converters.CustomerDTOToCustomer;
 import org.academiadecodigo.variachis.delta.back_end.dto.AuthCustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.dto.CustomerDTO;
 import org.academiadecodigo.variachis.delta.back_end.exceptions.CustomerNotFoundException;
 import org.academiadecodigo.variachis.delta.back_end.persistence.model.Customer;
+import org.academiadecodigo.variachis.delta.back_end.services.AuthService;
 import org.academiadecodigo.variachis.delta.back_end.services.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +19,11 @@ import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 public class LoginController {
 
     private AuthCustomerDTOToCustomer authCustomerDTOToCustomer;
-    private AuthServiceImpl authService;
+    private AuthService authService;
     private CustomerRestController customerRestController;
     private CustomerToCustomerDTO customerToCustomerDTO;
 
@@ -73,6 +73,7 @@ public class LoginController {
 
         return new ResponseEntity<>(customerDTO, HttpStatus.OK);
     }
+
 
 
 }

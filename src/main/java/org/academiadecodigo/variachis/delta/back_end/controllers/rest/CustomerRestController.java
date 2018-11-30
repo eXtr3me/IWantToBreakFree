@@ -1,4 +1,4 @@
-package org.academiadecodigo.variachis.delta.back_end.controllers;
+package org.academiadecodigo.variachis.delta.back_end.controllers.rest;
 
 
 import org.academiadecodigo.variachis.delta.back_end.converters.CustomerToCustomerDTO;
@@ -27,7 +27,7 @@ import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/api/customer")
 public class CustomerRestController {
 
     private CustomerService customerService;

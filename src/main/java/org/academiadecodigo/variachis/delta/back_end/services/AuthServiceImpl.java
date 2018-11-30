@@ -28,6 +28,10 @@ public class AuthServiceImpl implements AuthService {
         this.authCustomerDTOToCustomer = authCustomerDTOToCustomer;
     }
 
+    @Autowired
+    public void setCustomerDAO(CustomerDAO customerDAO) {
+        this.customerDAO = customerDAO;
+    }
 
     public Customer verify(AuthCustomerDTO authCustomerDTO) throws CustomerNotFoundException {
 
