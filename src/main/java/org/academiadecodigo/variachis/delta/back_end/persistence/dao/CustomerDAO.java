@@ -22,7 +22,7 @@ public class CustomerDAO {
 
     protected EntityManager entityManager;
 
-    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }

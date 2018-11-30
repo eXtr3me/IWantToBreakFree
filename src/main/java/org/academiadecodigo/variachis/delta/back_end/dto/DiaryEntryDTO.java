@@ -1,10 +1,5 @@
 package org.academiadecodigo.variachis.delta.back_end.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import org.springframework.stereotype.Component;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -13,10 +8,10 @@ public class DiaryEntryDTO {
 
     private Integer id;
 
-    private Date date;
+    private String date;
 
     @NotNull
-    private String numberOfSmokedCigarretes;
+    private Integer numberOfSmokedCigarrettes;
 
     private double moneySpent;
 
@@ -28,20 +23,20 @@ public class DiaryEntryDTO {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public String getNumberOfSmokedCigarretes() {
-        return numberOfSmokedCigarretes;
+    public Integer getNumberOfSmokedCigarretes() {
+        return numberOfSmokedCigarrettes;
     }
 
-    public void setNumberOfSmokedCigarretes(String numberOfSmokedCigarretes) {
-        this.numberOfSmokedCigarretes = numberOfSmokedCigarretes;
+    public void setNumberOfSmokedCigarretes(Integer numberOfSmokedCigarretes) {
+        this.numberOfSmokedCigarrettes = numberOfSmokedCigarretes;
     }
 
     public double getMoneySpent() {
@@ -50,5 +45,15 @@ public class DiaryEntryDTO {
 
     public void setMoneySpent(double moneySpent) {
         this.moneySpent = moneySpent;
+    }
+
+    @Override
+    public String toString() {
+        return "DiaryEntryDTO{" +
+                "id=" + id +
+                ", date='" + date + '\'' +
+                ", numberOfSmokedCigarrettes=" + numberOfSmokedCigarrettes +
+                ", moneySpent=" + moneySpent +
+                '}';
     }
 }

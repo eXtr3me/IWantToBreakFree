@@ -1,14 +1,11 @@
 package org.academiadecodigo.variachis.delta.back_end.persistence.model;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import java.util.Date;
 
 import static java.lang.Integer.parseInt;
 
@@ -17,43 +14,39 @@ import static java.lang.Integer.parseInt;
 @Table(name = "diary")
 public class DiaryEntry extends AbstractModel {
 
-    private static final double PRICE_PER_CIGARRETTE = 0.20;
+    private static final double PRICE_PER_CIGARETTE = 0.20;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Customer customer;
 
     //private Date date;
-    @Generated(GenerationTime.ALWAYS)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date date;
-    private String numberOfSmokedCigarretes;
+    //@Generated(GenerationTime.ALWAYS)
+    private String date;
+    private Integer numberOfSmokedCigarrettes;
     private double moneySpent;
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    @Autowired
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public String getNumberOfSmokedCigarretes() {
-        return numberOfSmokedCigarretes;
+    public Integer getNumberOfSmokedCigarrettes() {
+        return numberOfSmokedCigarrettes;
     }
 
-    @Autowired
-    public void setNumberOfSmokedCigarretes(String numberOfSmokedCigarretes) {
-        this.numberOfSmokedCigarretes = numberOfSmokedCigarretes;
+    public void setNumberOfSmokedCigarrettes(Integer numberOfSmokedCigarrettes) {
+        this.numberOfSmokedCigarrettes = numberOfSmokedCigarrettes;
 
-        setMoneySpent(parseInt(numberOfSmokedCigarretes) * PRICE_PER_CIGARRETTE);
+        setMoneySpent(numberOfSmokedCigarrettes * PRICE_PER_CIGARETTE);
     }
 
    public Customer getCustomer() {
         return customer;
     }
 
-    @Autowired
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -64,5 +57,14 @@ public class DiaryEntry extends AbstractModel {
 
     private void setMoneySpent(double moneySpent) {
         this.moneySpent = moneySpent;
+    }
+
+    @Override
+    public String toString() {
+        return "DiaryEntry{" +
+                ", date='" + date + '\'' +
+                ", numberOfSmokedCigarrettes=" + numberOfSmokedCigarrettes +
+                ", moneySpent=" + moneySpent +
+                '}';
     }
 }

@@ -15,4 +15,6 @@ public interface CustomerService {
     void delete (Integer id);
 
     List<DiaryEntry> getDiary(Customer customer);
+
+    String getDate();
 }

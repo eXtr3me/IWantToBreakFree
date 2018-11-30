@@ -23,12 +23,17 @@ public class Customer extends AbstractModel {
 
             // use recipient foreign key on recipient table to establish
             // the many-to-one relationship instead of a join table
-            mappedBy = "customer"
+            mappedBy = "customer",
+            fetch = FetchType.EAGER
     )
     private List<DiaryEntry> diary = new LinkedList<>();
 
     public List<DiaryEntry> getDiary() {
         return diary;
+    }
+
+    public void setDiary(List<DiaryEntry> diary) {
+        this.diary = diary;
     }
 
     public String getUsername() {
@@ -83,6 +88,9 @@ public class Customer extends AbstractModel {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
+                ", addiction='" + addiction + '\'' +
+                ", mediumDailySmokedCigarretes='" + mediumDailySmokedCigarretes + '\'' +
+                ", diary=" + diary +
                 '}';
     }
 }

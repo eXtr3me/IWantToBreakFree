@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerDAO = customerDAO;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public Customer get(Integer id) {
         return customerDAO.findById(id);
@@ -40,6 +41,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<DiaryEntry> getDiary(Customer customer) {
         return customerDAO.getDiary(customer);
+    }
+    @Override
+    public String getDate(){
+        Date actualDate = new Date();
+        String date = actualDate.toString();
+        return date;
     }
 
 

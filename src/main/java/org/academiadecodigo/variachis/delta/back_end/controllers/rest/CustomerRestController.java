@@ -113,7 +113,10 @@ public class CustomerRestController {
     @GetMapping(path = "/{id}/diary")
     public ResponseEntity<List<DiaryEntryDTO>> accessDiary(@PathVariable Integer id) {
 
-        List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
+        // List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
+        System.out.println("CUSTOMER " + customerService.get(id));
+        List<DiaryEntry> diary = customerService.get(id).getDiary();
+        System.out.println("DIARY " + Arrays.toString(diary.toArray()));
 
         List<DiaryEntryDTO> diaryDTO = new LinkedList<>();
 
@@ -122,18 +125,19 @@ public class CustomerRestController {
             diaryDTO.add(diaryEntryToDiaryentryDTO.convert(entry));
         }
 
+        System.out.println("DTO " + Arrays.toString(diaryDTO.toArray()));
         return new ResponseEntity<>(diaryDTO, HttpStatus.OK);
     }
 
 
     @PostMapping(path = "/{id}/diary")
-    public ResponseEntity<String> postNewEntryInDiary(@Valid @RequestBody String numberOfSmokedCigarretesToday, BindingResult bindingResult, @PathVariable Integer id) {
+    public ResponseEntity<?> postNewEntryInDiary(@Valid @RequestBody Integer numberOfSmokedCigarrettesToday, BindingResult bindingResult, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        if (id == null || numberOfSmokedCigarretesToday == null) {
+        if (id == null || numberOfSmokedCigarrettesToday == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -142,17 +146,14 @@ public class CustomerRestController {
         }
 
         List<DiaryEntry> diary = customerService.getDiary(customerService.get(id));
-
         DiaryEntry diaryEntry = new DiaryEntry();
-        diaryEntry.setDate(new java.sql.Date(new java.util.Date().getTime()));
-        diaryEntry.setNumberOfSmokedCigarretes(numberOfSmokedCigarretesToday);
+        diaryEntry.setDate(customerService.getDate());
+        diaryEntry.setNumberOfSmokedCigarrettes(numberOfSmokedCigarrettesToday);
 
         diary.add(diaryEntry);
 
         customerService.save(customerService.get(id));
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("New entry added successfully", HttpStatus.OK);
     }
-
-
 }
