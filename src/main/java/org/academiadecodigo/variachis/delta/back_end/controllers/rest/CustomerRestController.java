@@ -15,6 +15,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -135,6 +137,10 @@ public class CustomerRestController {
     public ResponseEntity<?> postNewEntryInDiary(@Valid @RequestBody DiaryOutDTO numberOfSmokedCigarrettesToday, BindingResult bindingResult, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()) {
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                System.out.println(error);
+
+            }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 

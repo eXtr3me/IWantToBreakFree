@@ -1,10 +1,10 @@
 DELETE FROM customer;
 INSERT INTO customer(ID, USERNAME, PASSWORD, EMAIL, PHONE, ADDICTION) VALUES
-  (1, 'Rui', '1234', 'mail@gmail.com', '777888', 'tobacco');
+  (1, 'James', '1234', 'james@gmail.com', '666777888', 'tobacco');
 INSERT INTO customer(ID, USERNAME, PASSWORD, EMAIL, PHONE, ADDICTION) VALUES
-  (2, 'Sergio', '2345', 'mail@gmail.com', '777888', 'tobacco');
+  (2, 'John', '2345', 'john@gmail.com', '777666888', 'tobacco');
 INSERT INTO customer(ID, USERNAME, PASSWORD, EMAIL, PHONE, ADDICTION) VALUES
-  (3, 'Bruno', '3456', 'mail@gmail.com', '777888', 'tobacco');
+  (3, 'Bruno', '3456', 'bruno@gmail.com', '777777888', 'tobacco');
 
 DELETE FROM diary;
 INSERT INTO diary(CUSTOMER_ID, DATE, NUMBEROFSMOKEDCIGARRETTES, MONEYSPENT) VALUES
