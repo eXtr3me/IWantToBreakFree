@@ -26,7 +26,6 @@ public class CustomerDTOToCustomer implements Converter<CustomerDTO, Customer> {
         customer.setPassword(customerDTO.getPassword());
         customer.setEmail(customerDTO.getEmail());
         customer.setPhone(customerDTO.getPhone());
-        customer.setPhone(customerDTO.getAddiction());
 
         return customer;
     }

@@ -12,9 +12,6 @@ public class Customer extends AbstractModel {
     private String password;
     private String email;
     private String phone;
-    private String addiction;
-    private Integer mediumDailySmokedCigarretes;
-  private List<String> diary;
 
     public String getUsername() {
         return username;
@@ -46,18 +43,6 @@ public class Customer extends AbstractModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddiction() {
-        return addiction;
-    }
-
-    public void setAddiction(String addiction) {
-        this.addiction = addiction;
-    }
-
-    public Integer moneySpentToday() {
-
     }
 
     @Override

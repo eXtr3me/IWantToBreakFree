@@ -1,6 +1,7 @@
 package org.academiadecodigo.variachis.delta.back_end.converters;
 
 import org.springframework.core.convert.converter.*;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
